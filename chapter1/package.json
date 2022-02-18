@@ -1,0 +1,8 @@
+{
+  "name": "chapter1",
+  "description": "# 리팩터링: 첫 번째 예시",
+  "scripts": {
+    "main": "node ./main/statement.js",
+    "test": "../node_modules/mocha/bin/mocha ./test/**.spec.js"
+  }
+}

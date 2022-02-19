@@ -12,7 +12,7 @@ function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
+    const play = playFor(perf);
 
     let thisAmount = amountFor(perf, play);
 
@@ -34,6 +34,10 @@ function statement(invoice, plays) {
   result += `적립 포인트: ${volumeCredits}점\n`;
 
   return result;
+
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID]
+  }
 
   function amountFor(aPerformance, play) {
     let result = 0;

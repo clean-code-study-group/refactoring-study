@@ -1,7 +1,7 @@
 const invoicesData = require("./data/invoices.json");
 const playsData = require("./data/plays.json");
 
-function statement(invoice, plays) {
+function renderPlainText(invoice, plays) {
   let result = `청구내역 (고객명: ${invoice.customer})\n`;
   for (let perf of invoice.performances) {
     // 청구 내역을 출력한다.
@@ -34,7 +34,7 @@ function statement(invoice, plays) {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 2,
-    }).format(aNumber/100);
+    }).format(aNumber / 100);
   }
 
   function volumeCreditsFor(perf) {
@@ -75,6 +75,10 @@ function statement(invoice, plays) {
     }
     return result;
   }
+}
+
+function statement(invoice, plays) {
+  return renderPlainText(invoice, plays);
 }
 
 console.log(statement(invoicesData[0], playsData));

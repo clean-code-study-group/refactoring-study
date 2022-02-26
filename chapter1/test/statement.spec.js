@@ -17,6 +17,11 @@ Othello : $500.00 (40석)
   });
 
     it("Taehun의 청구서는 지원하지 않는 play.type을 가지고 있어 청구내용 발행이 실패한다", () => {
-        assert.throws(() => statement(invoicesData[1], playsData), Error);
+        try {
+            statement(invoicesData[1], playsData)
+            assert.fail()
+        } catch (err) {
+            assert.strictEqual(err.message, '알 수 없는 장르 : horor')
+        }
     });
 });

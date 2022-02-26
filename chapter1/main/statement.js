@@ -24,7 +24,7 @@ function renderPlainText(data, plays) {
   function totalVolumeCredits() {
     let volumeCredits = 0;
     for (let perf of data.performances) {
-      volumeCredits += volumeCreditsFor(perf);
+      volumeCredits += perf.volumeCredits;
     }
     return volumeCredits;
   }

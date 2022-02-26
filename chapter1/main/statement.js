@@ -81,6 +81,8 @@ function statement(invoice, plays) {
   const statementData = {};
   statementData.customer = invoice.customer;
   statementData.performances = invoice.performances.map(enrichPerformance);
+  statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   return renderPlainText(statementData, plays);
 
   function enrichPerformance(aPerformance) {
@@ -128,6 +130,23 @@ function statement(invoice, plays) {
       result += Math.floor(perf.audience / 5);
     }
     return result;
+  }
+
+  function totalAmount(data) {
+    let totalAmount = 0;
+    for (let perf of data.performances) {
+      totalAmount += perf.amount;
+    }
+
+    return totalAmount;
+  }
+
+  function totalVolumeCredits(data) {
+    let volumeCredits = 0;
+    for (let perf of data.performances) {
+      volumeCredits += perf.volumeCredits;
+    }
+    return volumeCredits;
   }
 }
 

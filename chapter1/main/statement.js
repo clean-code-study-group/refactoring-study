@@ -2,6 +2,14 @@ const createStatementData = require("./createStatementData");
 const invoicesData = require("./data/invoices.json");
 const playsData = require("./data/plays.json");
 
+function usd(aNumber) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(aNumber / 100);
+}
+
 function renderPlainText(data, plays) {
   let result = `청구내역 (고객명: ${data.customer})\n`;
   for (let perf of data.performances) {
@@ -12,14 +20,6 @@ function renderPlainText(data, plays) {
   result += `적립 포인트: ${(data.totalVolumeCredits)}점\n`;
 
   return result;
-
-  function usd(aNumber) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(aNumber / 100);
-  }
 }
 
 function statement(invoice, plays) {
